@@ -1,0 +1,164 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
+
+body {
+  margin: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #121212;
+  color: #e0e0e0;
+  overflow: hidden;
+}
+
+/* We use a grid to stack the text elements on top of each other */
+.container.v2 {
+  display: flex;
+  place-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+}
+
+.content-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  position: relative; /* Needed for positioning the logos */
+}
+
+.focus-container {
+  display: grid;
+  place-items: center;
+  text-align: center;
+}
+
+/* Both text elements will live in the same grid cell */
+.ideas-text,
+.identity-text-v2 {
+  grid-area: 1 / 1;
+  margin: 0;
+}
+
+.ideas-text {
+  font-size: clamp(2.5rem, 10vw, 6rem);
+  font-weight: 900;
+  letter-spacing: -0.05em;
+  color: #fafafa;
+  /* animation: fadeInAndOut 4s ease-in-out forwards; */ /* Replaced by framer-motion */
+  z-index: 2; /* Ensure it's on top */
+}
+
+.identity-text-v2 {
+  font-size: clamp(1.5rem, 6vw, 3.5rem);
+  font-weight: 700;
+  color: #666;
+  z-index: 1;
+  text-shadow: 0 0 15px rgba(120, 120, 120, 0.5); /* Glow effect */
+  /* animation: fadeInFromBlur 1.5s ease-out 3s forwards; */ /* Replaced by framer-motion */
+}
+
+.not-text-v2 {
+  /* The "Not" is slightly more visible than the rest of the identity text */
+  color: #888;
+}
+
+.brand-name {
+  position: absolute;
+  bottom: 2rem;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #555;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+
+  justify-content: center;
+  align-items: center;
+}
+
+.dot-expand-button {
+  --dot-color: #fafafa;
+  --text-color: #fafafa;
+  --text-hover-color: #121212;
+
+  position: relative;
+  overflow: hidden;
+  padding: 1rem 2rem;
+  border: 2px solid var(--text-color);
+  border-radius: 999px;
+  background-color: transparent;
+  color: var(--text-color);
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: color 0.4s ease-out;
+}
+
+.dot-expand-button span {
+  position: relative;
+  z-index: 1;
+}
+
+.dot-expand-button::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background-color: var(--dot-color);
+  transform: translate(-50%, -50%);
+  transition: width 0.4s ease-out, height 0.4s ease-out;
+}
+
+.dot-expand-button:hover {
+  color: var(--text-hover-color);
+}
+
+.dot-expand-button:hover::before {
+  width: 250%; /* Large enough to cover the button */
+  height: 250%;
+}
+
+.floating-logo {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 0; /* Behind the text */
+}
+
+.floating-logo.left {
+  left: -60px; /* Position closer to the main text area */
+}
+
+.floating-logo.right {
+  right: -60px; /* Position closer to the main text area */
+}
+
+@keyframes fadeInAndOut {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  25% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  75% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInFromBlur {
+  from { opacity: 0; filter: blur(5px); }
+  to   { opacity: 1; filter: blur(0); }
+}
